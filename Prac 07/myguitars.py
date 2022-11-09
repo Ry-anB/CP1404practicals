@@ -16,6 +16,18 @@ def main():
     for guitar in guitars:
         print(guitar)
 
+    choice = input("Would you like to add new guitars? Y/N: ").upper()
+    while choice == "Y":
+        name = input("Name: ")
+        year = input("Year: ")
+        cost = input("Cost: ")
+        guitars.append(Guitar(name, int(year), float(cost)))
+        choice = input("Would you like to add new guitars? Y/N: ").upper()
+    out_file = open('guitars.csv', 'w')
+    for guitar in guitars:
+        print(f"{guitar.name},{guitar.year},{guitar.cost}", file=out_file)
+    out_file.close()
+
 
 if __name__ == '__main__':
     main()
