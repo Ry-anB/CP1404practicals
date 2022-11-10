@@ -107,6 +107,8 @@ def update_project(projects):
     for project in projects:
         print(f"{projects.index(project)} {project}")
     index_choice = int(input("Project choice: "))
+    selected_project = projects[index_choice]
+    print(selected_project)
 
 
 main()
