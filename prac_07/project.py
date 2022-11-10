@@ -1,6 +1,6 @@
 """CP1404/CP5632 Practical 07 - Project Class"""
 
-from datetime import date, datetime
+from datetime import datetime
 
 
 class Project:
@@ -22,3 +22,18 @@ class Project:
     def is_complete(self):
         """Determine if a project is complete."""
         return self.completion >= 100
+
+    def __eq__(self, other):
+        return self.name == other.name
+
+    def __ge__(self, other):
+        return self.start_date >= other.start_date
+
+    def __lt__(self, other):
+        return self.start_date < other.start_date
+
+    def update_priority(self, priority):
+        self.priority = priority
+
+    def update_completion(self, completion):
+        self.completion = completion
