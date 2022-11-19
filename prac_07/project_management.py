@@ -40,9 +40,12 @@ def format_date(date):
     """Return date input to format as dd/mm/yyyy - accepts date as yyyy/mm/dd"""
     project_start_date = date.split("/")
     start_date_as_datetime = \
+
+        datetime.date(int(project_start_date[2]), int(project_start_date[1]),
+                      int(project_start_date[0]))
+
         datetime.date(int(project_start_date[2]), int(project_start_date[1]), int(project_start_date[0]))
-    formatted_date = datetime.date.strftime(start_date_as_datetime, "%d/%m/%Y")
-    return formatted_date
+
 
 
 def load_data_from_file(file, data):
@@ -52,7 +55,10 @@ def load_data_from_file(file, data):
     for line in in_file:
         parts = line.strip().split('\t')
         project_start_date = format_date(parts[1])
-        project = Project(parts[0], project_start_date, int(parts[2]), float(parts[3]), int(parts[4]))
+
+        project = Project(parts[0], project_start_date, int(parts[2]),
+                          float(parts[3]), int(parts[4]))
+
         if project not in data:
             data.append(project)
     in_file.close()
@@ -61,6 +67,8 @@ def load_data_from_file(file, data):
 def save_data_to_file(file, data):
     """Prints data to an output file"""
     out_file = open(file, "w")
+    print("Name	Start Date	Priority	Cost Estimate	Completion Percentage", file=out_file)
+
     for project in data:
         print(f"{project.name}\t{project.start_date}\t{project.priority}\t"
               f"{project.estimate}\t{project.completion}", file=out_file)
@@ -107,6 +115,14 @@ def update_project(projects):
     for project in projects:
         print(f"{projects.index(project)} {project}")
     index_choice = int(input("Project choice: "))
+
+    selected_project = projects[index_choice]
+    new_percentage = int(input("New Percentage: "))
+    # Project.update_completion(selected_project, new_percentage)
+    selected_project.completion = new_percentage
+    new_priority = int(input("New Priority: "))
+    # Project.update_priority(selected_project, new_priority)
+    selected_project.priority = new_priority
 
 
 main()

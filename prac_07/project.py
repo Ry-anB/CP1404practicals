@@ -32,8 +32,10 @@ class Project:
     def __lt__(self, other):
         return self.start_date < other.start_date
 
-    def update_priority(self, priority):
-        self.priority = priority
-
     def update_completion(self, completion):
+        """Update completion for project"""
         self.completion = completion
+
+    def update_priority(self, priority):
+        """Update priority for project"""
+        self.priority = priority
